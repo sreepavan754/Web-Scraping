@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>All Products</title>
+    <link rel="stylesheet" href="{{url_for('static',filename='index.css')}}">
+</head>
+
+<style>
+    table,tr,td{
+        border:1px solid black;
+        border-collapse: collapse;
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    .table{
+        display: flex;
+        flex-direction: column;
+    }
+    .headings{
+        display: flex;
+        justify-content: space-between;
+        width: 100%;
+        /* border:1px solid black */
+    }
+    .data{
+        width: 100%;
+        display: flex;
+        justify-content: space-between;
+    }
+    h3{
+        text-align: center;
+        width: 20%;
+    }
+
+    .data span{
+        text-align: center;
+        width: 20%;
+        border: 1px solid black;
+        padding: 2px;
+    }
+    body{
+        font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+    }
+    a{
+        color: black;
+        text-decoration: none;
+    }
+</style>
+
+<body>
+    <div class="container">
+
+{% if account %}
+<div class="btn-parent">
+    <a class="a" href="/logout" style="border:1px solid black;border-radius: 5px;background-color: aqua;padding: 5px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Logout</a>
+    <a href="/compare/0" class="a" style="border:1px solid black;border-radius: 5px;background-color: aqua;padding: 5px;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;">Compare</a>
+</div>
+
+
+{% endif %}
+                
+        <div class="table-container">
+            <h1 class="heading" style="text-align: center;font-family:'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif">All Products</h1>
+            {% if data|length == 0 %}
+
+            <h2 style="color:#cc0e0e;text-align: center;">No Report Found</h2>
+            {% else %}
+            <div class="table">
+                <div style="width: 100%;">
+                    <div class="headings">
+                        <h3>Index</h3>
+                        <h3>Product name</h3>
+                        <h3>Product price</h3>
+                        <h3>Product image</h3>
+                        <h3>Product Reviews</h3>
+                        
+                    </div>
+                </div>
+                <div >
+                    {% for i in data %} 
+                    <div class="data">
+                        <span data-label="SL">{{loop.index}}</span>
+                        <span data-label="product_name">{{i[0]}}</span>
+                        <span data-label="product_price">{{i[1]}}</span>
+                        <span data-label="product_image"><img class="table-image" src="{{i[3]}}" alt="product image">
+                        </span>
+                        <span data-label="product_review">{{i[2]}}</span>
+                    </div>
+                    {% endfor %}
+                    </div>
+                </div>
+            {% endif %}
+        </div>
+        
+    </div>
+
+
+
+
+</body>
+
+</html>
